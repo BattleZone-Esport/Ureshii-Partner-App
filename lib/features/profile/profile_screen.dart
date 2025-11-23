@@ -6,6 +6,8 @@ import '../../core/theme/text_styles.dart';
 import '../../data/models/user_stats_model.dart';
 import '../../data/services/stats_service.dart';
 import '../../data/services/firebase_auth_service.dart';
+import '../settings/settings_screen.dart';
+import '../github/github_integration_screen.dart';
 import 'package:intl/intl.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -294,6 +296,68 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
 
+            // Quick Actions Section
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 20),
+                    Text(
+                      'Quick Actions',
+                      style: AppTextStyles.headline2,
+                    )
+                        .animate()
+                        .fadeIn(delay: const Duration(milliseconds: 900))
+                        .slideX(begin: -0.2, end: 0),
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: _buildActionButton(
+                            icon: Icons.settings,
+                            title: 'Settings',
+                            gradient: AppColors.primaryGradient,
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const SettingsScreen(),
+                                ),
+                              );
+                            },
+                          ).animate()
+                              .fadeIn(delay: const Duration(milliseconds: 1000))
+                              .slideX(begin: -0.3, end: 0),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: _buildActionButton(
+                            icon: Icons.cloud_upload,
+                            title: 'GitHub',
+                            gradient: const LinearGradient(
+                              colors: [AppColors.accentGreen, AppColors.accentBlue],
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const GitHubIntegrationScreen(),
+                                ),
+                              );
+                            },
+                          ).animate()
+                              .fadeIn(delay: const Duration(milliseconds: 1100))
+                              .slideX(begin: 0.3, end: 0),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
             // Achievements Section
             SliverToBoxAdapter(
               child: Padding(
@@ -307,7 +371,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       style: AppTextStyles.headline2,
                     )
                         .animate()
-                        .fadeIn(delay: const Duration(milliseconds: 1000))
+                        .fadeIn(delay: const Duration(milliseconds: 1200))
                         .slideX(begin: -0.2, end: 0),
                     const SizedBox(height: 16),
                     _buildAchievementsGrid(),
@@ -578,6 +642,69 @@ class _ProfileScreenState extends State<ProfileScreen> {
           isUnlocked: isUnlocked,
         );
       }).toList(),
+    );
+  }
+
+  Widget _buildActionButton({
+    required IconData icon,
+    required String title,
+    required Gradient gradient,
+    required VoidCallback onTap,
+  }) {
+    return GlassmorphicContainer(
+      width: double.infinity,
+      height: 100,
+      borderRadius: 16,
+      blur: 15,
+      alignment: Alignment.center,
+      border: 2,
+      linearGradient: LinearGradient(
+        colors: [
+          AppColors.cardColor.withValues(alpha: 0.5),
+          AppColors.surfaceColor.withValues(alpha: 0.3),
+        ],
+      ),
+      borderGradient: LinearGradient(
+        colors: [
+          AppColors.primaryPurple.withValues(alpha: 0.3),
+          AppColors.secondaryPink.withValues(alpha: 0.3),
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(16),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    gradient: gradient,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    icon,
+                    color: AppColors.textPrimary,
+                    size: 24,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  title,
+                  style: AppTextStyles.bodyMedium.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 

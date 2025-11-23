@@ -5,8 +5,8 @@ import '../../core/constants/colors.dart';
 import '../../core/constants/strings.dart';
 import '../../core/theme/text_styles.dart';
 import '../characters/characters_screen.dart';
-import '../chat/chat_screen.dart';
 import '../projects/projects_screen.dart';
+import '../coding/ai_coding_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -90,7 +90,7 @@ class HomeScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const ChatScreen(),
+                        builder: (context) => const AICodingScreen(),
                       ),
                     );
                   },
