@@ -1,7 +1,7 @@
 /// API Configuration for URESHII Partner
 class ApiConfig {
   // OpenRouter API Configuration
-  static const String openRouterApiKey = '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';
+  static const String openRouterApiKey = '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';
   static const String openRouterBaseUrl = 'https://openrouter.ai/api/v1';
   
   // AI Model Configuration (Valid Free Models)

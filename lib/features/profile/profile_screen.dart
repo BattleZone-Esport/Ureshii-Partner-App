@@ -8,6 +8,7 @@ import '../../data/services/stats_service.dart';
 import '../../data/services/firebase_auth_service.dart';
 import '../settings/settings_screen.dart';
 import '../github/github_integration_screen.dart';
+import '../deployment/deployment_screen.dart';
 import 'package:intl/intl.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -337,7 +338,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             icon: Icons.cloud_upload,
                             title: 'GitHub',
                             gradient: const LinearGradient(
-                              colors: [AppColors.accentGreen, AppColors.accentBlue],
+                              colors: [AppColors.secondaryPink, AppColors.accentPink],
                             ),
                             onTap: () {
                               Navigator.push(
@@ -349,6 +350,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             },
                           ).animate()
                               .fadeIn(delay: const Duration(milliseconds: 1100))
+                              .slideX(begin: 0, end: 0),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: _buildActionButton(
+                            icon: Icons.rocket_launch,
+                            title: 'Deploy',
+                            gradient: const LinearGradient(
+                              colors: [AppColors.accentGreen, AppColors.accentBlue],
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const DeploymentScreen(),
+                                ),
+                              );
+                            },
+                          ).animate()
+                              .fadeIn(delay: const Duration(milliseconds: 1200))
                               .slideX(begin: 0.3, end: 0),
                         ),
                       ],

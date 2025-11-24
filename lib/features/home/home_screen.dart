@@ -7,6 +7,7 @@ import '../../core/theme/text_styles.dart';
 import '../characters/characters_screen.dart';
 import '../projects/projects_screen.dart';
 import '../coding/ai_coding_screen.dart';
+import '../deployment/deployment_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -131,18 +132,18 @@ class HomeScreen extends StatelessWidget {
                 ),
                 _buildFeatureCard(
                   context: context,
-                  icon: Icons.chat_bubble,
-                  title: 'Recent',
-                  subtitle: 'Chats',
+                  icon: Icons.rocket_launch,
+                  title: 'Deploy',
+                  subtitle: 'Projects',
                   gradient: const LinearGradient(
-                    colors: [AppColors.secondaryPink, AppColors.accentPink],
+                    colors: [AppColors.accentGreen, AppColors.accentBlue],
                   ),
                   index: 3,
                   onTap: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Recent chats feature coming soon!'),
-                        backgroundColor: AppColors.primaryPurple,
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const DeploymentScreen(),
                       ),
                     );
                   },
